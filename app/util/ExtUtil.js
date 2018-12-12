@@ -4,8 +4,30 @@
 Ext.define('util.ExtUtil', {
     singleton: true,
     alternateClassName: 'ExtUtil',
+    /**
+     *
+     * 根据className获取对象
+     * @param className
+     */
     getComponent: function (className) {
         return Ext.ComponentQuery.query(className)[0]
+    },
+
+    /**
+     * 获取toolbar中item的值
+     * @param tbar
+     * @param itemId
+     */
+    getToolbarItem: function (tbar, itemId) {
+        return tbar.down('#' + itemId).getValue();
+    },
+
+    /**
+     * 获取对象的toolbar
+     * @param grid
+     */
+    getToolbar: function (component) {
+        return component.getDockedItems('toolbar[dock="top"]')[0];
     },
 
     /**

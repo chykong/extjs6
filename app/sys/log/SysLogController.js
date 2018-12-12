@@ -2,27 +2,25 @@ Ext.define('sys.log.SysLogController', {
     extend: 'Ext.app.ViewController',
     alias: 'controller.sysLogController',
     init: function (application) {
-        var grid = Ext.ComponentQuery.query('sysLog')[0];
-        var toolbar = grid.getDockedItems()[0];
-        var store = grid.getStore();
+        var grid = ExtUtil.getComponent('sysLog'),
+            store = grid.getStore();
         store.on({
                 'beforeload': this.beforeload
             }
         )
     },
     beforeload: function (store) {
-        var grid = Ext.ComponentQuery.query('sysLog')[0];
-        var toolbar = grid.getDockedItems('toolbar[dock="top"]')[0];
+        var grid = ExtUtil.getComponent('sysLog'),
+            toolbar = ExtUtil.getToolbar(grid);
         Ext.apply(store.proxy.extraParams, {
-            userId: toolbar.down('#txtUserId').getValue(),
-            startDate: StringUtil.formatDate(toolbar.down('#txtStartDate').getValue()),
-            endDate: StringUtil.formatDate(toolbar.down('#txtEndDate').getValue())
+            userId: ExtUtil.getToolbarItem(toolbar, 'txtUserId'),
+            startDate: StringUtil.formatDate(ExtUtil.getToolbarItem(toolbar, 'txtStartDate')),
+            endDate: StringUtil.formatDate(ExtUtil.getToolbarItem(toolbar, 'txtEndDate'))
         });
     },
     searchLog: function (btn, e, eOpts) {
-        var me = this;
-        var grid = btn.up('grid');
-        var store = grid.getStore();
+        var grid = btn.up('grid'),
+            store = grid.getStore();
         store.load();
     }
 });
