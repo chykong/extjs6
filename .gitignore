@@ -1,1 +1,7 @@
 # Created by .ignore support plugin (hsz.mobi)
+### ExtJs template
+.architect
+build/
+resources/sass/.sass-cache/
+.sencha
+.idea
