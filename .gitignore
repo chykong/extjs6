@@ -15,3 +15,5 @@ resources/sass/.sass-cache/
 app2/
 overrides/
 packages/
+bootstrap.json
+bootstrap.jsonp
