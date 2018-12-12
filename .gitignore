@@ -4,4 +4,14 @@
 build/
 resources/sass/.sass-cache/
 .sencha
-.idea
+.idea/*
+.idea/checkstyle-idea.xml
+.idea/dictionaries/
+.idea/encodings.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/web.iml
+.idea/workspace.xml
+app2/
+overrides/
+packages/
