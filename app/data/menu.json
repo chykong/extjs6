@@ -1,0 +1,51 @@
+[
+  {
+    text: '系统管理',
+    id: 'sys',
+    expanded: true,
+    children: [
+      {
+        id: 'sysResource',
+        text: '模块管理',
+        leaf: true
+      },
+      {
+        id: 'sysRole',
+        text: '角色管理',
+        leaf: true
+      },
+      {
+        id: 'sysUser',
+        text: '用户管理',
+        leaf: true
+      },
+      {
+        id: 'sysLog',
+        text: '操作日志',
+        leaf: true
+      },
+      {
+        id: 'framed-panels',
+        text: 'Framed Panel',
+        leaf: true
+      }
+    ]
+  },
+  {
+    text: 'Trees',
+    id: 'trees',
+    expanded: true,
+    children: [
+      {
+        id: 'basic-trees',
+        text: 'Basic Trees',
+        leaf: true
+      },
+      {
+        id: 'tree-reorder',
+        text: 'Tree Reorder',
+        leaf: true
+      }
+    ]
+  },
+]
