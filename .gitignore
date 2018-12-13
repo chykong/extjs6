@@ -12,7 +12,6 @@ resources/sass/.sass-cache/
 .idea/modules.xml
 .idea/web.iml
 .idea/workspace.xml
-app2/
 overrides/
 packages/
 bootstrap.json

@@ -9,6 +9,7 @@ Ext.define('sys.log.SysLogController', {
             }
         )
     },
+
     beforeload: function (store) {
         var grid = ExtUtil.getComponent('sysLog'),
             toolbar = ExtUtil.getToolbar(grid);

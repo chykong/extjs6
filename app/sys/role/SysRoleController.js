@@ -5,7 +5,8 @@ Ext.define('sys.role.SysRoleController', {
     init: function (application) {
         // ExtUtil.getComponent('sysRole').getStore().load();
     },
-
+    beforeRender: function () {
+    },
     /*  onGridRender: function (grid, eOpts) {
      grid.getStore().load();
      },*/
