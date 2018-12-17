@@ -24,17 +24,16 @@ Ext.define('hygl.Application', {
         'util.ExtUtil',
     ],
     views: [
-        'main.index.MainIndex',
-        'sys.log.SysLog',
-        'sys.role.SysRole',
-        'sys.user.SysUser',
-        'sys.resource.SysResource',
+        'hygl.view.main.index.MainIndex',
+        // 'sys.log.SysLogController'
+        // 'sys.log.SysLog',
+        // 'sys.role.SysRole',
+        // 'sys.user.SysUser',
+        // 'sys.resource.SysResource',
     ],
     launch: function () {
 
         Ext.setGlyphFontFamily('FontAwesome'); // 设置图标字体文件，只有设置了以后才能用glyph属性
-
-
         Ext.define('Ext.Ajax', {
             extend: 'Ext.data.Connection',
             singleton: true,
@@ -94,7 +93,7 @@ Ext.define('hygl.Application', {
             extend: 'util.ux.AbstractInterceptor',
             interceptor: function (options, response) {//
                 var resultData = JSON.parse(response.responseText);
-                if (resultData.success==false) {//只处理未授权、超时等问题
+                if (resultData.success == false) {//只处理未授权、超时等问题
                     Ext.Msg.alert('操作提示', resultData.message);
                     return false;
                 }
@@ -153,8 +152,12 @@ Ext.define('hygl.Application', {
             },
             confirmPasswordText: '两次密码输入不一致'
         });
-
-
+        Ext.Loader.setConfig({
+            enabled: true,
+            paths: {
+                hygl: 'app'
+            }
+        });
         //设置首页面
         Ext.create({
             xtype: 'mainIndex'
