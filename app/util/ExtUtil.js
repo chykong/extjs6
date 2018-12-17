@@ -30,6 +30,21 @@ Ext.define('util.ExtUtil', {
         return component.getDockedItems('toolbar[dock="top"]')[0];
     },
 
+    createPageProxy: function (url) {
+        return {
+            type: 'ajax',
+            actionMethods: {
+                read: 'POST'
+            },
+            url: url,
+            reader: {
+                type: 'json',
+                totalProperty: 'data.total',
+                rootProperty: 'data.root'
+            },
+            paramsAsJson: true
+        }
+    },
     /**
      * 分页store
      */

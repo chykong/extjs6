@@ -3,16 +3,22 @@ Ext.define('hygl.view.sys.log.SysLog', {
     alias: 'sysLog',
     xtype: 'sysLog',
     requires: [
-        // 'sys.log.SysLogController',
+        'hygl.view.sys.log.SysLogController',
         'hygl.view.sys.log.SysLogModel'
     ],
-    store: ExtUtil.createPageStore(GlobalConst.appDoamin + '/sys/log/list', 'hygl.view.sys.log.SysLogModel'),
+    viewModel: {
+        type: "sys_log"
+    },
+    bind: {
+        store: "{sysLogStore}"
+    },
+    // store: ExtUtil.createPageStore(GlobalConst.appDoamin + '/sys/log/list', 'hygl.view.sys.log.SysLogModel'),
     title: '日志管理',
     glyph: IconUtil.glyphGrid,
     frame: true,
     height: GlobalConst.frameHeight,
     width: '100%',
-    // controller: 'sysLogController',
+    controller: 'sysLogController',
     columns: [{
         xtype: 'rownumberer',
         width: 40
