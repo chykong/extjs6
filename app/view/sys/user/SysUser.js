@@ -4,9 +4,15 @@ Ext.define('hygl.view.sys.user.SysUser', {
     xtype: 'sysUser',
     requires: [
         'hygl.view.sys.user.SysUserController',
-        'hygl.view.sys.user.SysUserModel'
+        'hygl.view.sys.user.SysUserViewModel'
     ],
-    store: ExtUtil.createPageStore(GlobalConst.appDoamin + '/sys/user/list', 'hygl.view.sys.user.SysUserModel'),
+    viewModel: {
+        type: "sys_user_viewmodel"
+    },
+    bind: {
+        store: "{sysUserStore}"
+    },
+    // store: ExtUtil.createPageStore(GlobalConst.appDoamin + '/sys/user/list', 'hygl.view.sys.user.SysUserModel'),
     title: '用户管理',
     glyph: IconUtil.glyphGrid,
     frame: true,

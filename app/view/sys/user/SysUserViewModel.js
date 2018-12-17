@@ -1,11 +1,11 @@
-Ext.define('hygl.view.sys.log.SysLogModel', {
+Ext.define('hygl.view.sys.user.SysUserViewModel', {
     extend: "Ext.app.ViewModel",
-    alias: "viewmodel.sys_log",
-    requires: ["hygl.store.sys.SysLog"],
+    alias: "viewmodel.sys_user_viewmodel",
+    requires: ["hygl.store.sys.SysUserStore"],
     data: {},
     stores: {
-        'sysLogStore': {
-            type: 'sys_log',
+        'sysUserStore': {
+            type: 'sys_user_store',
             autoLoad: true
         },
         state: Ext.create("Ext.data.Store", {

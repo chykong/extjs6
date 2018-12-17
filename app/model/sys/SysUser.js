@@ -1,4 +1,4 @@
-Ext.define('hygl.view.sys.user.SysUserModel', {
+Ext.define('hygl.mode.sys.SysUser', {
     extend: 'Ext.data.Model',
     fields: [{
         name: 'id',

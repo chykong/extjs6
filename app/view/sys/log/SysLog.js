@@ -4,10 +4,10 @@ Ext.define('hygl.view.sys.log.SysLog', {
     xtype: 'sysLog',
     requires: [
         'hygl.view.sys.log.SysLogController',
-        'hygl.view.sys.log.SysLogModel'
+        'hygl.view.sys.log.SysLogViewModel'
     ],
     viewModel: {
-        type: "sys_log"
+        type: "sys_log_viewmodel"
     },
     bind: {
         store: "{sysLogStore}"
