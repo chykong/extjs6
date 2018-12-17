@@ -1,7 +1,8 @@
 Ext.define('hygl.view.sys.user.SysUserWindow', {
     extend: 'Ext.window.Window',
     alias: 'sysUserWindow',
-    controller: 'sysUserController',
+    requires: ['hygl.view.sys.user.SysUserController'],
+    controller: 'sys_user_controller',
     height: 600,
     width: 600,
     modal: true,
@@ -18,7 +19,7 @@ Ext.define('hygl.view.sys.user.SysUserWindow', {
             labelWidth: 90,
             msgTarget: 'qtip',
             anchor: '100%',
-            margin : '0 0 4 0',
+            margin: '0 0 4 0',
             style: 'width:50%'
         },
         items: [{

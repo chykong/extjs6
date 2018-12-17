@@ -18,7 +18,7 @@ Ext.define('hygl.view.sys.user.SysUser', {
     frame: true,
     height: GlobalConst.frameHeight,
     width: '100%',
-    controller: 'sysUserController',
+    controller: 'sys_user_controller',
     columns: [{
         xtype: 'rownumberer', width: 40
     }, {
