@@ -114,20 +114,9 @@ Ext.define('hygl.view.sys.user.SysUser', {
         },
         {
             xtype: 'button',
-            text: '添加',
+            text: '新增',
             glyph: IconUtil.glyphAdd,
             handler: 'onAddClick'
-        }, /*{
-         xtype: 'button',
-         text: '修改',
-         glyph: IconUtil.glyphEdit(),
-         handler: 'onEditClick'
-         },*/
-        {
-            xtype: 'button',
-            text: '删除',
-            glyph: IconUtil.glyphDelete,
-            handler: 'onDeleteClick'
         }
     ],
     bbar: {

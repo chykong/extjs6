@@ -4,10 +4,12 @@ Ext.define('hygl.view.sys.log.SysLogController', {
     // requires: ['sys.log.SysLog'],
     init: function (application) {
         var store = this.getViewModel().getStore("sysLogStore")
-        store.on({
-                'beforeload': this.beforeload
-            }
-        )
+        if (store) {
+            store.on({
+                    'beforeload': this.beforeload
+                }
+            )
+        }
     },
     beforeload: function (store) {
         var grid = ExtUtil.getComponent('sysLog'),

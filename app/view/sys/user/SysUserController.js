@@ -4,10 +4,12 @@ Ext.define('hygl.view.sys.user.SysUserController', {
     init: function (application) {
         //给用户store加上查询参数
         var store = this.getViewModel().getStore("sysUserStore");
-        store.on({
-                'beforeload': this.beforeload
-            }
-        )
+        if (store) {
+            store.on({
+                    'beforeload': this.beforeload
+                }
+            )
+        }
     },
 
     onGridRender: function (grid, eOpts) {
@@ -34,7 +36,6 @@ Ext.define('hygl.view.sys.user.SysUserController', {
         var win = Ext.create('hygl.view.sys.user.SysUserWindow', {title: '修改用户'});
         win.down('form').loadRecord(record);
         win.down('form').getForm().findField('roleId').getStore().load();
-        win.show();
     },
     onCancelClick: function (btn, e, eOpts) {
         var win = btn.up('window');

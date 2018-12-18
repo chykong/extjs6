@@ -1,7 +1,7 @@
 Ext.define('hygl.view.sys.user.SysUserWindow', {
     extend: 'Ext.window.Window',
     alias: 'sysUserWindow',
-    requires: ['hygl.view.sys.user.SysUserController'],
+    // requires: ['hygl.view.sys.user.SysUserController'],
     controller: 'sys_user_controller',
     height: 600,
     width: 600,
