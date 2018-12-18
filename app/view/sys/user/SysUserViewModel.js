@@ -8,12 +8,6 @@ Ext.define('hygl.view.sys.user.SysUserViewModel', {
             type: 'sys_user_store',
             autoLoad: true
         },
-        state: Ext.create("Ext.data.Store", {
-            fields: ["stateId", "stateName"],
-            data: [
-                ["0", "启用"],
-                ["1", "禁用"]
-            ]
-        })
+        statusStore: StoreUtil.createComboStore2('0:正常;1:禁用')
     }
 });

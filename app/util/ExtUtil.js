@@ -21,7 +21,22 @@ Ext.define('util.ExtUtil', {
     getToolbarItem: function (tbar, itemId) {
         return tbar.down('#' + itemId).getValue();
     },
-
+    /**
+     * 设置toolbar中item的值
+     * @param tbar
+     * @param itemId
+     */
+    setToolbarItem: function (tbar, itemId, value) {
+        return tbar.down('#' + itemId).setValue(value);
+    },
+    /**
+     * 清空toolbar中item的值
+     * @param tbar
+     * @param itemId
+     */
+    clearToolbarItem: function (tbar, itemId) {
+        return tbar.down('#' + itemId).setValue('');
+    },
     /**
      * 获取对象的toolbar
      * @param grid

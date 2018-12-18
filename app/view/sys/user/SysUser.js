@@ -84,17 +84,45 @@ Ext.define('hygl.view.sys.user.SysUser', {
         }]
     }
     ],
-    tbar: [{
-        xtype: 'button',
-        text: '添加',
-        glyph: IconUtil.glyphAdd,
-        handler: 'onAddClick'
-    }, /*{
-     xtype: 'button',
-     text: '修改',
-     glyph: IconUtil.glyphEdit(),
-     handler: 'onEditClick'
-     },*/
+    tbar: [
+        '用户名:', {
+            xtype: 'textfield',
+            itemId: 'txtUsername', width: 100
+        },
+        '状态：', {
+            xtype: 'combo',
+            itemId: 'cmbStatus',
+            valueField: 'value',
+            displayField: 'content',
+            bind: {
+                store: "{statusStore}"
+            },
+            queryMode: 'local',
+            width: 120,
+            editable: true
+        },
+        {
+            xtype: 'button',
+            glyph: IconUtil.glyphSearch,
+            text: '查询',
+            handler: 'search'
+        }, {
+            xtype: 'button',
+            glyph: IconUtil.glyphClear,
+            text: '清空',
+            handler: 'clear'
+        },
+        {
+            xtype: 'button',
+            text: '添加',
+            glyph: IconUtil.glyphAdd,
+            handler: 'onAddClick'
+        }, /*{
+         xtype: 'button',
+         text: '修改',
+         glyph: IconUtil.glyphEdit(),
+         handler: 'onEditClick'
+         },*/
         {
             xtype: 'button',
             text: '删除',

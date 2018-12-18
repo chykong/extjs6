@@ -9,9 +9,13 @@ Ext.define('util.IconUtil', {
     glyphClose: 0xf00d,//关闭
     glyphBack: 0xf148,//返回
     glyphOK: 0xf00c,//确认
+    glyphClear: 0xf0e2,//清空
     glyphImport: 0xf112,//导入
     glyphExport: 0xf1c3,//导出
     glyphReset: 0xf1da,//重置
+    glyphUp: 0xf139,//上移
+    glyphDown: 0xf13a,// 下移
     glyphGrid: 0xf00b,//grid
     glyphWindow: 0xf022,//window
+    glyphTree: 0xf19c,//tree
 });

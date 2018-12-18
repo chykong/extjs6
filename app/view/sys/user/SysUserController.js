@@ -2,7 +2,12 @@ Ext.define('hygl.view.sys.user.SysUserController', {
     extend: 'Ext.app.ViewController',
     alias: 'controller.sys_user_controller',
     init: function (application) {
-        // Ext.ComponentQuery.query('sysUser')[0].getStore().load();
+        //给用户store加上查询参数
+        var store = this.getViewModel().getStore("sysUserStore");
+        store.on({
+                'beforeload': this.beforeload
+            }
+        )
     },
 
     onGridRender: function (grid, eOpts) {
@@ -91,5 +96,29 @@ Ext.define('hygl.view.sys.user.SysUserController', {
             }
         });
         win.close();
+    },
+    beforeload: function (store) {
+        var grid = ExtUtil.getComponent('sysUser'),
+            toolbar = ExtUtil.getToolbar(grid);
+        Ext.apply(store.proxy.extraParams, {
+            username: ExtUtil.getToolbarItem(toolbar, 'txtUsername'),
+            status: ExtUtil.getToolbarItem(toolbar, 'cmbStatus'),
+        });
+    },
+    /**
+     * 查询
+     */
+    search: function () {
+        var store = this.getViewModel().getStore("sysUserStore")
+        store.load();
+    },
+    /**
+     * 清空
+     */
+    clear: function () {
+        var grid = ExtUtil.getComponent('sysUser'),
+            toolbar = ExtUtil.getToolbar(grid);
+        ExtUtil.clearToolbarItem(toolbar, 'txtUsername');
+        ExtUtil.clearToolbarItem(toolbar, 'cmbStatus');
     }
 });
