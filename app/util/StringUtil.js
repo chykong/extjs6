@@ -169,7 +169,7 @@ Ext.define('util.StringUtil', {
     windowCancel: function (btn) {
         var win = btn.up('window');
         var form = win.down('form');
-        form.getForm().reset();
+        if (form) form.getForm().reset();
         win.close();
     }
 });

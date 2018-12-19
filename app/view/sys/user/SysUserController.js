@@ -2,108 +2,71 @@ Ext.define('hygl.view.sys.user.SysUserController', {
     extend: 'Ext.app.ViewController',
     alias: 'controller.sys_user_controller',
     init: function (application) {
-        //给用户store加上查询参数
-        var store = this.getViewModel().getStore("sysUserStore");
-        if (store) {
-            store.on({
-                    'beforeload': this.beforeload
-                }
-            )
-        }
     },
 
-    onGridRender: function (grid, eOpts) {
-        // grid.getStore().load();
-    },
-
-    openForm: function (title) {
-        var win = Ext.create('sys.user.SysUserWindow');
-        win.setTitle(title);
-        return win;
-    },
-
-    onAddClick: function (btn, e, eOpts) {
+    add: function (btn, e, eOpts) {
         var win = Ext.create('hygl.view.sys.user.SysUserWindow', {
             title: '新增用户'
         });
         var form = win.down('form');
         form.getForm().findField("id").setValue("0");
-        form.getForm().findField('roleId').getStore().load();
+        this.getViewModel().getStore("sysUserRoleStore").load();
     },
 
-    updateRec: function (grid, rowIndex, colIndex) {
+    edit: function (grid, rowIndex, colIndex) {
         var record = grid.getStore().getAt(rowIndex);
         var win = Ext.create('hygl.view.sys.user.SysUserWindow', {title: '修改用户'});
         win.down('form').loadRecord(record);
-        win.down('form').getForm().findField('roleId').getStore().load();
+        this.getViewModel().getStore("sysUserRoleStore").load();
     },
-    onCancelClick: function (btn, e, eOpts) {
-        var win = btn.up('window');
-        var form = win.down('form');
-        form.getForm().reset();
-        win.close();
-    },
-    deleleRec: function (grid, rowIndex, colIndex) {
+    delete: function (grid, rowIndex, colIndex) {
         var store = grid.getStore();
         var record = store.getAt(rowIndex);
-        Ext.Msg.confirm('确认删除', '你确定删除该条记录?', function (btn) {
-            if (btn == 'yes') {
-                Ext.Ajax.request({
+
+        StringUtil.confirmDelete({
+            check: function () {
+                AjaxUtil.doPost({
                     url: GlobalConst.appDoamin + '/sys/user/delete',
                     jsonData: {
                         id: record.data.id
                     },
-                    success: function (response) {
-                        var result = Ext.decode(response.responseText);
-                        if (result.success) {
-                            Ext.Msg.alert('操作提示', '删除成功', function () {
-                                store.reload();
-                            });
-                        } else {
-                            Ext.Msg.alert('操作提示', result.message);
-                        }
+                    success: function (ret) {
+                        Ext.Msg.alert('操作提示', '删除成功', function () {
+                            store.reload();
+                        });
                     }
-                });
+                })
             }
         });
     },
 
-    onSaveClick: function (btn, e, eOpts) {
+    save: function (btn, e, eOpts) {
         var win = btn.up('window'),
             form = win.down('form'),
-            values = form.getValues(),
-            grid = Ext.ComponentQuery.query('sysUser')[0],
-            store = grid.getStore();
-        var id = form.getForm().findField('id').getValue();
-
-        var url = '';
-        if (id == 0)
-            url = GlobalConst.appDoamin + '/sys/user/add';
+            grid = Ext.ComponentQuery.query('sysUser')[0];
+        id = form.getForm().findField('id').getValue();
+        var url = GlobalConst.appDoamin;
+        if (StringUtil.getFormField(form, 'id') == 0)
+            url += '/sys/user/add';
         else
-            url = GlobalConst.appDoamin + '/sys/user/update';
-        var data = form.getValues();
+            url += '/sys/user/update';
         if (!form.isValid())return;
-        Ext.Ajax.request({
+        AjaxUtil.doPost({
             url: url,
-            method: 'POST',
-            waitMsg: '提交中',
-            jsonData: data,
-            success: function () {
-                store.reload();
-                win.hide();
-            },
-            failure: function () {
-                Ext.Msg.alert('操作提示', action.result.msg)
+            jsonData: form.getValues(),
+            success: function (response) {
+                grid.getViewModel().getStore("sysUserStore").reload();
+                win.close();
             }
         });
-        win.close();
     },
+    //userStore加载前赋参数
     beforeload: function (store) {
         var grid = ExtUtil.getComponent('sysUser'),
-            toolbar = ExtUtil.getToolbar(grid);
+            data = grid.getViewModel().getData();
         Ext.apply(store.proxy.extraParams, {
-            username: ExtUtil.getToolbarItem(toolbar, 'txtUsername'),
-            status: ExtUtil.getToolbarItem(toolbar, 'cmbStatus'),
+            username: data.searchField.username,
+            status: data.searchField.status
         });
     },
     /**
@@ -117,9 +80,26 @@ Ext.define('hygl.view.sys.user.SysUserController', {
      * 清空
      */
     clear: function () {
-        var grid = ExtUtil.getComponent('sysUser'),
-            toolbar = ExtUtil.getToolbar(grid);
-        ExtUtil.clearToolbarItem(toolbar, 'txtUsername');
-        ExtUtil.clearToolbarItem(toolbar, 'cmbStatus');
+        // var grid = ExtUtil.getComponent('sysUser'),
+        //     toolbar = ExtUtil.getToolbar(grid);
+        // ExtUtil.clearToolbarItem(toolbar, 'txtUsername');
+        // ExtUtil.clearToolbarItem(toolbar, 'cmbStatus');
+        this.getViewModel().setData({
+            searchField: {
+                txtUsername: '',
+                status: ''
+            }
+        })
+    },
+    /**
+     * 用户状态渲染
+     * @param val
+     * @returns {string}
+     */
+    renderStatus: function (val) {
+        if (val == 0)
+            return '<span style="color:' + "green" + ';">' + '正常' + '</span>';
+        else if (val == 1)
+            return '<span style="color:' + "orange" + ';">' + '锁定' + '</span>';
     }
 });

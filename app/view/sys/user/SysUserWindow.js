@@ -1,8 +1,13 @@
 Ext.define('hygl.view.sys.user.SysUserWindow', {
     extend: 'Ext.window.Window',
     alias: 'sysUserWindow',
-    // requires: ['hygl.view.sys.user.SysUserController'],
     controller: 'sys_user_controller',
+    requires: [
+        'hygl.view.sys.user.SysUserViewModel'
+    ],
+    viewModel: {
+        type: 'sys_user_viewmodel'
+    },
     height: 600,
     width: 600,
     modal: true,
@@ -95,7 +100,7 @@ Ext.define('hygl.view.sys.user.SysUserWindow', {
                 xtype: 'combobox',
                 valueField: 'value',
                 displayField: 'content',
-                store: StoreUtil.createComboStore(GlobalConst.appDoamin + '/sys/role/listCombo'),
+                bind: {store: '{sysUserRoleStore}'},
                 width: 300,
                 multiSelect: false,
                 queryMode: 'local',
@@ -109,13 +114,13 @@ Ext.define('hygl.view.sys.user.SysUserWindow', {
             text: '保存',
             itemId: 'save',
             glyph: IconUtil.glyphSave,
-            handler: 'onSaveClick'
+            handler: 'save'
         }, {
             xtype: 'button',
             text: '取消',
             itemId: 'cancel',
             glyph: IconUtil.glyphClose,
-            handler: 'onCancelClick'
+            handler: StringUtil.windowCancel
         }
     ]
 });
