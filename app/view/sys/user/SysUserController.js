@@ -3,7 +3,12 @@ Ext.define('hygl.view.sys.user.SysUserController', {
     alias: 'controller.sys_user_controller',
     init: function (application) {
     },
-
+    /**
+     * 点击新增按钮
+     * @param btn
+     * @param e
+     * @param eOpts
+     */
     add: function (btn, e, eOpts) {
         var win = Ext.create('hygl.view.sys.user.SysUserWindow', {
             title: '新增用户'
@@ -12,13 +17,24 @@ Ext.define('hygl.view.sys.user.SysUserController', {
         form.getForm().findField("id").setValue("0");
         this.getViewModel().getStore("sysUserRoleStore").load();
     },
-
+    /**
+     * 点击修改按钮
+     * @param grid
+     * @param rowIndex
+     * @param colIndex
+     */
     edit: function (grid, rowIndex, colIndex) {
         var record = grid.getStore().getAt(rowIndex);
         var win = Ext.create('hygl.view.sys.user.SysUserWindow', {title: '修改用户'});
         win.down('form').loadRecord(record);
         this.getViewModel().getStore("sysUserRoleStore").load();
     },
+    /**
+     * 删除选中记录
+     * @param grid
+     * @param rowIndex
+     * @param colIndex
+     */
     delete: function (grid, rowIndex, colIndex) {
         var store = grid.getStore();
         var record = store.getAt(rowIndex);
@@ -39,12 +55,15 @@ Ext.define('hygl.view.sys.user.SysUserController', {
             }
         });
     },
-
-    save: function (btn, e, eOpts) {
+    /**
+     * 增加或修改后保存
+     * @param btn
+     */
+    save: function (btn) {
         var win = btn.up('window'),
             form = win.down('form'),
-            grid = Ext.ComponentQuery.query('sysUser')[0];
-        id = form.getForm().findField('id').getValue();
+            grid = ExtUtil.getComponent('sysUser'),
+            id = StringUtil.getFormField(form, 'id')
         var url = GlobalConst.appDoamin;
         if (StringUtil.getFormField(form, 'id') == 0)
             url += '/sys/user/add';
@@ -64,10 +83,7 @@ Ext.define('hygl.view.sys.user.SysUserController', {
     beforeload: function (store) {
         var grid = ExtUtil.getComponent('sysUser'),
             data = grid.getViewModel().getData();
-        Ext.apply(store.proxy.extraParams, {
-            username: data.searchField.username,
-            status: data.searchField.status
-        });
+        Ext.apply(store.proxy.extraParams, data.searchField);
     },
     /**
      * 查询
@@ -80,13 +96,9 @@ Ext.define('hygl.view.sys.user.SysUserController', {
      * 清空
      */
     clear: function () {
-        // var grid = ExtUtil.getComponent('sysUser'),
-        //     toolbar = ExtUtil.getToolbar(grid);
-        // ExtUtil.clearToolbarItem(toolbar, 'txtUsername');
-        // ExtUtil.clearToolbarItem(toolbar, 'cmbStatus');
         this.getViewModel().setData({
             searchField: {
-                txtUsername: '',
+                username: '',
                 status: ''
             }
         })
@@ -100,6 +112,6 @@ Ext.define('hygl.view.sys.user.SysUserController', {
         if (val == 0)
             return '<span style="color:' + "green" + ';">' + '正常' + '</span>';
         else if (val == 1)
-            return '<span style="color:' + "orange" + ';">' + '锁定' + '</span>';
+            return '<span style="color:' + "red" + ';">' + '锁定' + '</span>';
     }
 });

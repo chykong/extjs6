@@ -12,13 +12,12 @@ Ext.define('hygl.view.sys.user.SysUser', {
     bind: {
         store: '{sysUserStore}'
     },
-    // store: ExtUtil.createPageStore(GlobalConst.appDoamin + '/sys/user/list', 'hygl.view.sys.user.SysUserModel'),
+    controller: 'sys_user_controller',
     title: '用户管理',
     glyph: IconUtil.glyphGrid,
     frame: true,
     height: GlobalConst.frameHeight,
     width: '100%',
-    controller: 'sys_user_controller',
     columns: [{
         xtype: 'rownumberer', width: 40
     }, {
@@ -43,8 +42,7 @@ Ext.define('hygl.view.sys.user.SysUser', {
         }, {
             text: '删除', tooltip: '删除', handler: 'delete'
         }]
-    }
-    ],
+    }],
     tbar: [
         '用户名:', {
             xtype: 'textfield', itemId: 'txtUsername', width: 100, bind: {value: '{searchField.username}'}

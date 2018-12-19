@@ -66,6 +66,7 @@ Ext.define('hygl.view.sys.log.SysLog', {
     }],
     tbar: ['用户：', {
         xtype: 'textfield',
+        bind: {value: '{searchField.userId}'},
         itemId: 'txtUserId',
         valueField: 'value',
         displayField: 'content',
@@ -75,25 +76,21 @@ Ext.define('hygl.view.sys.log.SysLog', {
         typeAhead: true,
         editable: true
     }, '起始日期:', {
-        itemId: 'txtStartDate',
         xtype: 'datefield',
         format: 'Y-m-d',
-        value: StringUtil.getBeforeDate(10),
+        bind: {value: '{searchField.startDate}'},
         width: 120
     }, '终止日期:', {
-        itemId: 'txtEndDate',
         xtype: 'datefield',
         format: 'Y-m-d',
-        value: StringUtil.getToday(),
+        bind: {value: '{searchField.endDate}'},
         width: 120
     }, {
-        xtype: 'button',
-        glyph: IconUtil.glyphSearch,
-        text: '查询',
-        handler: 'searchLog'
+        xtype: 'button', glyph: IconUtil.glyphSearch, text: '查询', handler: 'search'
+    }, {
+        xtype: 'button', glyph: IconUtil.glyphClear, text: '清空', handler: 'clear'
     }],
     bbar: {
-        xtype: 'pagingtoolbar',
-        displayInfo: true
+        xtype: 'pagingtoolbar', displayInfo: true
     }
 });

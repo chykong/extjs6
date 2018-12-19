@@ -6,14 +6,18 @@ Ext.define('hygl.view.sys.log.SysLogViewModel', {
     stores: {
         'sysLogStore': {
             type: 'sys_log_store',
-            autoLoad: true
-        },
-        state: Ext.create("Ext.data.Store", {
-            fields: ["stateId", "stateName"],
-            data: [
-                ["0", "启用"],
-                ["1", "禁用"]
-            ]
-        })
+            autoLoad: false,
+            listeners: {
+                beforeload: 'beforeload'
+            }
+        }
+    },
+    data: {
+        //查询条件
+        searchField: {
+            userId: '',
+            startDate: StringUtil.getBeforeDate(10),
+            endDate: StringUtil.getToday()
+        }
     }
 });
