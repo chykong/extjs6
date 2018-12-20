@@ -8,7 +8,7 @@ Ext.define('hygl.view.rest.interface.RestInterfaceWindow', {
     viewModel: {
         type: 'rest_interface_viewmodel'
     },
-    height: 400,
+    height: 600,
     width: 600,
     modal: true,
     glyph: IconUtil.glyphWindow,
@@ -33,9 +33,18 @@ Ext.define('hygl.view.rest.interface.RestInterfaceWindow', {
             name: 'id',
             xtype: 'hiddenfield'
         }, {
-            name: 'parentId', xtype: 'textfield',
+            name: 'systemId',
             fieldLabel: '系统名称',
+            xtype: 'combo',
+            valueField: 'value',
+            displayField: 'content',
+            bind: {
+                store: '{rest_system_store}'
+            },
+            queryMode: 'local',
+            editable: false,
             allowBlank: false
+
         }, {
             name: 'name',
             fieldLabel: '接口名称',
@@ -47,15 +56,26 @@ Ext.define('hygl.view.rest.interface.RestInterfaceWindow', {
             allowBlank: false,
             maxLength: 200
         }, {
-            name: '请求类型',
-            fieldLabel: 'requestType',
+            name: 'requestType',
+            fieldLabel: '请求类型',
+            xtype: 'combo',
+            valueField: 'value',
+            displayField: 'content',
+            bind: {
+                store: '{interface_type_store}'
+            },
+            queryMode: 'local',
+            editable: false,
+            allowBlank: false
         }, {
-            name: '模拟数据',
-            fieldLabel: 'requestExample',
+            name: 'requestExample',
+            fieldLabel: '模拟数据',
+            xtype: 'textarea',
+            height: 200,
             maxLength: 2000
         }, {
-            name: '上级接口',
-            fieldLabel: 'parentId'
+            name: 'parentId',
+            fieldLabel: '上级接口'
         }],
         buttons: [
             {

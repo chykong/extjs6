@@ -4,7 +4,7 @@ Ext.define('hygl.view.rest.system.RestSystemViewModel', {
     requires: ["hygl.store.rest.RestSystemStore"],
     stores: {
         //系统名称store
-        'restSystemStore': {
+        rest_system_store: {
             type: 'rest_system_store',
             autoLoad: true,
             listeners: {

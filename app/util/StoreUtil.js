@@ -5,8 +5,7 @@
 Ext.define('util.StoreUtil', {
     singleton: true,
     alternateClassName: 'StoreUtil',
-    requires: [
-    ],
+    requires: [],
     /**
      * 通过url创建下拉框的store
      * @param url
@@ -15,6 +14,7 @@ Ext.define('util.StoreUtil', {
     createComboStore: function (url) {
         return Ext.create('Ext.data.Store', {
             model: 'util.ComboboxData',
+            autoLoad: true,
             proxy: {
                 type: 'ajax',
                 actionMethods: {

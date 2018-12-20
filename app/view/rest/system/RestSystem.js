@@ -10,10 +10,10 @@ Ext.define('hygl.view.rest.system.RestSystem', {
         type: 'rest_system_viewmodel'
     },
     bind: {
-        store: '{restSystemStore}'
+        store: '{rest_system_store}'
     },
     controller: 'rest_system_controller',
-    title: '接口系统管理',
+    title: '系统管理',
     glyph: IconUtil.glyphGrid,
     frame: true,
     height: GlobalConst.frameHeight,

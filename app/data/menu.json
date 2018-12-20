@@ -23,11 +23,6 @@
         id: 'sysLog',
         text: '操作日志',
         leaf: true
-      },
-      {
-        id: 'framed-panels',
-        text: 'Framed Panel',
-        leaf: true
       }
     ]
   },
@@ -42,10 +37,10 @@
         leaf: true
       },
       {
-        id: 'tree-reorder',
-        text: 'Tree Reorder',
+        id: 'restInterface',
+        text: '接口设置',
         leaf: true
       }
     ]
-  },
+  }
 ]

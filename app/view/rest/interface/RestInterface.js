@@ -10,7 +10,7 @@ Ext.define('hygl.view.rest.interface.RestInterface', {
         type: 'rest_interface_viewmodel'
     },
     bind: {
-        store: '{restInterfaceStore}'
+        store: '{rest_interface_store}'
     },
     controller: 'rest_interface_controller',
     title: '接口管理',
@@ -21,11 +21,11 @@ Ext.define('hygl.view.rest.interface.RestInterface', {
     columns: [{
         xtype: 'rownumberer', width: 40
     }, {
-        text: '名称', dataIndex: 'name', width: 200, sortable: false
+        text: '接口名称', dataIndex: 'name', width: 200, sortable: false
     }, {
-        text: '描述', dataIndex: 'description', flex: 1, sortable: false
+        text: 'url', dataIndex: 'url', flex: 1, sortable: false
     }, {
-        text: '排序', dataIndex: 'displayOrder', width: 60, sortable: false
+        text: '请求类型', dataIndex: 'requestType', width: 80, sortable: false
     }, {
         text: '操作', xtype: 'actioncolumn', width: 100, items: [{
             text: '修改', tooltip: '修改', handler: 'edit'
@@ -34,8 +34,16 @@ Ext.define('hygl.view.rest.interface.RestInterface', {
         }]
     }],
     tbar: ['系统名称：', {
-        xtype: 'textfield',
-        bind: {value: '{searchField.systemId}'}, width: 120
+        xtype: 'combo',
+        valueField: 'value',
+        displayField: 'content',
+        bind: {
+            store: '{rest_system_store}',
+            value: '{searchField.systemId}'
+        },
+        queryMode: 'local',
+        width: 180,
+        editable: true
     }, {
         xtype: 'button', glyph: IconUtil.glyphSearch, text: '查询', handler: 'search'
     }, {

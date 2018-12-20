@@ -57,7 +57,7 @@ Ext.define('hygl.view.sys.user.SysUser', {
             },
             queryMode: 'local',
             width: 120,
-            editable: true,
+            editable: true
         }, {
             xtype: 'button', glyph: IconUtil.glyphSearch, text: '查询', handler: 'search'
         }, {

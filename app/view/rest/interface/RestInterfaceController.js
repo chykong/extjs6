@@ -69,7 +69,7 @@ Ext.define('hygl.view.rest.interface.RestInterfaceController', {
             url: url,
             jsonData: form.getValues(),
             success: function (response) {
-                grid.getViewModel().getStore("restInterfaceStore").reload();
+                grid.getViewModel().getStore("rest_interface_store").reload();
                 win.close();
             }
         });
@@ -95,7 +95,7 @@ Ext.define('hygl.view.rest.interface.RestInterfaceController', {
      * 查询
      */
     search: function () {
-        var store = this.getViewModel().getStore("restInterfaceStore")
+        var store = this.getViewModel().getStore("rest_interface_store")
         store.load();
     },
 });
