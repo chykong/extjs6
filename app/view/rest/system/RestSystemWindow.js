@@ -8,7 +8,7 @@ Ext.define('hygl.view.rest.system.RestSystemWindow', {
     viewModel: {
         type: 'rest_system_viewmodel'
     },
-    height: 600,
+    height: 400,
     width: 600,
     modal: true,
     glyph: IconUtil.glyphWindow,
@@ -25,13 +25,15 @@ Ext.define('hygl.view.rest.system.RestSystemWindow', {
             msgTarget: 'qtip',
             anchor: '100%',
             margin: '0 0 4 0',
-            style: 'width:50%'
+            style: 'width:100%'
         },
+        defaultType: 'textfield',
+        buttonAlign: 'center',
         items: [{
             name: 'id',
             xtype: 'hiddenfield'
         }, {
-            name: 'name',
+            name: 'name', xtype: 'textfield',
             fieldLabel: '系统名称',
             allowBlank: false,
             maxLength: 50
@@ -39,13 +41,14 @@ Ext.define('hygl.view.rest.system.RestSystemWindow', {
             name: 'description',
             fieldLabel: '系统描述',
             allowBlank: true,
+            height: 200,
             xtype: 'textarea',
             maxLength: 500
         }, {
             name: 'displayOrder',
             fieldLabel: '排序',
             allowBlank: true,
-            xtype: 'posInt'
+            vtype: 'posInt'
         }],
         buttons: [
             {

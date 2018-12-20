@@ -75,6 +75,23 @@ Ext.define('hygl.view.rest.system.RestSystemController', {
         });
     },
     /**
+     * 清空
+     */
+    clear: function () {
+        this.getViewModel().setData({
+            searchField: {
+                name: ''
+            }
+        })
+    },
+    beforeload: function (store) {
+        var grid = ExtUtil.getComponent('restSystem'),
+            data = grid.getViewModel().getData();
+        Ext.apply(store.proxy.extraParams, {
+            name: data.searchField.name,
+        })
+    },
+    /**
      * 查询
      */
     search: function () {

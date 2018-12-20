@@ -11,5 +11,11 @@ Ext.define('hygl.view.rest.system.RestSystemViewModel', {
                 beforeload: 'beforeload'
             }
         }
+    },
+    data: {
+        //查询条件
+        searchField: {
+            name: ''
+        }
     }
 });

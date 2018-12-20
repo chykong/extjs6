@@ -33,12 +33,16 @@ Ext.define('hygl.view.rest.system.RestSystem', {
             text: '删除', tooltip: '删除', handler: 'delete'
         }]
     }],
-    tbar: [
-        {
-            xtype: 'button', glyph: IconUtil.glyphSearch, text: '刷新', handler: 'search'
-        }, {
-            xtype: 'button', text: '新增', glyph: IconUtil.glyphAdd, handler: 'add'
-        }
+    tbar: ['系统名称：', {
+        xtype: 'textfield',
+        bind: {value: '{searchField.name}'}, width: 120
+    }, {
+        xtype: 'button', glyph: IconUtil.glyphSearch, text: '查询', handler: 'search'
+    }, {
+        xtype: 'button', glyph: IconUtil.glyphClear, text: '清空', handler: 'clear'
+    }, '-', {
+        xtype: 'button', text: '新增', glyph: IconUtil.glyphAdd, handler: 'add'
+    }
     ],
     bbar: {
         xtype: 'pagingtoolbar', displayInfo: true

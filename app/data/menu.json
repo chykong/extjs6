@@ -32,13 +32,13 @@
     ]
   },
   {
-    text: 'Trees',
-    id: 'trees',
+    text: '接口管理',
+    id: 'rest',
     expanded: true,
     children: [
       {
-        id: 'basic-trees',
-        text: 'Basic Trees',
+        id: 'restSystem',
+        text: '系统名称维护',
         leaf: true
       },
       {
