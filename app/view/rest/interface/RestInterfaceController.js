@@ -1,0 +1,101 @@
+Ext.define('hygl.view.rest.interface.RestInterfaceController', {
+    extend: 'Ext.app.ViewController',
+    alias: 'controller.rest_interface_controller',
+    init: function (application) {
+    },
+    /**
+     * 点击新增按钮
+     * @param btn
+     */
+    add: function (btn) {
+        var win = Ext.create('hygl.view.rest.interface.RestInterfaceWindow', {
+            title: '新增接口'
+        });
+        var form = win.down('form');
+        form.getForm().findField("id").setValue("0");
+    },
+    /**
+     * 点击修改按钮
+     * @param grid
+     * @param rowIndex
+     * @param colIndex
+     */
+    edit: function (grid, rowIndex, colIndex) {
+        var record = grid.getStore().getAt(rowIndex);
+        var win = Ext.create('hygl.view.rest.interface.RestInterfaceWindow', {title: '修改接口'});
+        win.down('form').loadRecord(record);
+    },
+    /**
+     * 删除选中记录
+     * @param grid
+     * @param rowIndex
+     * @param colIndex
+     */
+    delete: function (grid, rowIndex, colIndex) {
+        var store = grid.getStore();
+        var record = store.getAt(rowIndex);
+        StringUtil.confirmDelete({
+            check: function () {
+                AjaxUtil.doPost({
+                    url: GlobalConst.appDoamin + '/rest/interface/delete',
+                    jsonData: {
+                        id: record.data.id
+                    },
+                    success: function (ret) {
+                        Ext.Msg.alert('操作提示', '删除成功', function () {
+                            store.reload();
+                        });
+                    }
+                })
+            }
+        });
+    },
+    /**
+     * 增加或修改后保存
+     * @param btn
+     */
+    save: function (btn) {
+        var win = btn.up('window'),
+            form = win.down('form'),
+            grid = ExtUtil.getComponent('restInterface'),
+            id = StringUtil.getFormField(form, 'id')
+        var url = GlobalConst.appDoamin;
+        if (StringUtil.getFormField(form, 'id') == 0)
+            url += '/rest/interface/add';
+        else
+            url += '/rest/interface/update';
+        if (!form.isValid())return;
+        AjaxUtil.doPost({
+            url: url,
+            jsonData: form.getValues(),
+            success: function (response) {
+                grid.getViewModel().getStore("restInterfaceStore").reload();
+                win.close();
+            }
+        });
+    },
+    /**
+     * 清空
+     */
+    clear: function () {
+        this.getViewModel().setData({
+            searchField: {
+                systemId: ''
+            }
+        })
+    },
+    beforeload: function (store) {
+        var grid = ExtUtil.getComponent('restInterface'),
+            data = grid.getViewModel().getData();
+        Ext.apply(store.proxy.extraParams, {
+            systemId: data.searchField.systemId,
+        })
+    },
+    /**
+     * 查询
+     */
+    search: function () {
+        var store = this.getViewModel().getStore("restInterfaceStore")
+        store.load();
+    },
+});
