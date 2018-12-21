@@ -1,6 +1,6 @@
-Ext.define('hygl.view.rest.interface.RestInterfaceWindow', {
+Ext.define('hygl.view.rest.param.RestParamWindow', {
     extend: 'Ext.window.Window',
-    alias: 'widget.rest_interface_window',
+    alias: 'widget.rest_param_window',
     controller: 'rest_interface_controller',
     requires: [
         'hygl.view.rest.interface.RestInterfaceViewModel'
@@ -8,7 +8,7 @@ Ext.define('hygl.view.rest.interface.RestInterfaceWindow', {
     viewModel: {
         type: 'rest_interface_viewmodel'
     },
-    height: 600,
+    height: 400,
     width: 600,
     modal: true,
     glyph: IconUtil.glyphWindow,
@@ -33,61 +33,58 @@ Ext.define('hygl.view.rest.interface.RestInterfaceWindow', {
             name: 'id',
             xtype: 'hiddenfield'
         }, {
-            name: 'systemId',
-            fieldLabel: '系统名称',
+            name: 'interfaceId',
+            xtype: 'hiddenfield'
+        }, {
+            name: 'type',
+            fieldLabel: '类型',
+            allowBlank: false,
             xtype: 'combo',
             valueField: 'value',
             displayField: 'content',
             bind: {
-                store: '{rest_system_store}'
+                store: '{type_store}'
             },
             queryMode: 'local',
             editable: false,
             allowBlank: false
-
         }, {
-            name: 'name',
-            fieldLabel: '接口名称',
+            name: 'paramName',
+            fieldLabel: '参数名称',
             allowBlank: false,
+            maxLength: 25
+        }, {
+            name: 'paramType',
+            fieldLabel: '参数类型',
+            allowBlank: false,
+            xtype: 'combo',
+            valueField: 'value',
+            displayField: 'content',
+            bind: {
+                store: '{param_type_store}'
+            },
+            queryMode: 'local',
+            editable: true,
+            allowBlank: true
+        }, {
+            name: 'paramLength',
+            fieldLabel: '长度',
+            maxLength: 4
+        }, {
+            name: 'paramDesc',
+            fieldLabel: '参数描述',
             maxLength: 100
         }, {
-            name: 'url',
-            fieldLabel: 'url',
-            allowBlank: false,
-            maxLength: 200
-        }, {
-            name: 'requestType',
-            fieldLabel: '请求类型',
-            xtype: 'combo',
-            valueField: 'value',
-            displayField: 'content',
-            bind: {
-                store: '{interface_type_store}'
-            },
-            queryMode: 'local',
-            editable: false,
-            allowBlank: false
-        }, {
-            name: 'description',
-            fieldLabel: '接口描述',
-            xtype: 'textarea',
-            maxLength: 500
-        }, {
-            name: 'requestExample',
-            fieldLabel: '模拟数据',
-            xtype: 'textarea',
-            height: 200,
-            maxLength: 2000
-        }, {
-            name: 'parentId',
-            fieldLabel: '上级接口'
+            name: 'displayOrder',
+            fieldLabel: '排序',
+            vtype: 'posInt'
         }],
         buttons: [
             {
                 xtype: 'button',
                 text: '保存',
                 glyph: IconUtil.glyphSave,
-                handler: 'save'
+                handler: 'saveParam'
             }, {
                 xtype: 'button',
                 text: '取消',

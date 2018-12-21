@@ -60,6 +60,20 @@ Ext.define('util.ExtUtil', {
             paramsAsJson: true
         }
     },
+    createNoPageProxy: function (url) {
+        return {
+            type: 'ajax',
+            actionMethods: {
+                read: 'POST'
+            },
+            url: url,
+            reader: {
+                type: 'json',
+                rootProperty: 'data'
+            },
+            paramsAsJson: true
+        }
+    },
     /**
      * 分页store
      */

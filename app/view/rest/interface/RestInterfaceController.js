@@ -3,6 +3,19 @@ Ext.define('hygl.view.rest.interface.RestInterfaceController', {
     alias: 'controller.rest_interface_controller',
     init: function (application) {
     },
+
+    /**
+     * 接口点击事件
+     */
+    onRowClick: function (grid, record, rowIndex, e) {
+        if (record.data.id == null)
+            return;
+        this.getViewModel().getStore("rest_param_store").reload({
+            params: {
+                interfaceId: record.data.id
+            }
+        })
+    },
     /**
      * 点击新增按钮
      * @param btn
@@ -12,7 +25,7 @@ Ext.define('hygl.view.rest.interface.RestInterfaceController', {
             title: '新增接口'
         });
         var form = win.down('form');
-        form.getForm().findField("id").setValue("0");
+        StringUtil.setFormField(form, 'id', '0');
     },
     /**
      * 点击修改按钮
@@ -57,7 +70,7 @@ Ext.define('hygl.view.rest.interface.RestInterfaceController', {
     save: function (btn) {
         var win = btn.up('window'),
             form = win.down('form'),
-            grid = ExtUtil.getComponent('restInterface'),
+            restInterface = ExtUtil.getComponent('restInterface'),
             id = StringUtil.getFormField(form, 'id')
         var url = GlobalConst.appDoamin;
         if (StringUtil.getFormField(form, 'id') == 0)
@@ -69,7 +82,7 @@ Ext.define('hygl.view.rest.interface.RestInterfaceController', {
             url: url,
             jsonData: form.getValues(),
             success: function (response) {
-                grid.getViewModel().getStore("rest_interface_store").reload();
+                restInterface.getViewModel().getStore("rest_interface_store").reload();
                 win.close();
             }
         });
@@ -97,5 +110,84 @@ Ext.define('hygl.view.rest.interface.RestInterfaceController', {
     search: function () {
         var store = this.getViewModel().getStore("rest_interface_store")
         store.load();
+    },
+    /**************************************************/
+    /**
+     * 新增参数
+     * @param btn
+     */
+    addParam: function (btn) {
+        var grid = ExtUtil.getComponent('restInterface').getComponent('restInterface');
+        var record = grid.getSelectionModel().getLastSelected();
+        if (!record)return;
+
+        var win = Ext.create('hygl.view.rest.param.RestParamWindow', {
+            title: '新增参数'
+        });
+        var form = win.down('form');
+        StringUtil.setFormField(form, 'id', '0');
+        // StringUtil.setFormField(form, 'type', '1');
+        StringUtil.setFormField(form, 'interfaceId', record.data.id);
+    },
+    /**
+     * 修改参数
+     * @param grid
+     * @param rowIndex
+     * @param colIndex
+     */
+    editParam: function (grid, rowIndex, colIndex) {
+        var record = grid.getStore().getAt(rowIndex);
+        var win = Ext.create('hygl.view.rest.param.RestParamWindow', {title: '修改参数'});
+        win.down('form').loadRecord(record);
+    },
+    /**
+     * 删除参数
+     * @param grid
+     * @param rowIndex
+     * @param colIndex
+     */
+    deleteParam: function (grid, rowIndex, colIndex) {
+        var store = grid.getStore();
+        var record = store.getAt(rowIndex);
+        StringUtil.confirmDelete({
+            check: function () {
+                AjaxUtil.doPost({
+                    url: GlobalConst.appDoamin + '/rest/param/delete',
+                    jsonData: {
+                        id: record.data.id
+                    },
+                    success: function (ret) {
+                        Ext.Msg.alert('操作提示', '删除成功', function () {
+                            store.reload();
+                        });
+                    }
+                })
+            }
+        });
+    },
+
+    /**
+     * 增加或修改参数
+     * @param btn
+     */
+    saveParam: function (btn) {
+        var win = btn.up('window'),
+            form = win.down('form'),
+            restInterface = ExtUtil.getComponent('restInterface'),
+            id = StringUtil.getFormField(form, 'id')
+        var url = GlobalConst.appDoamin;
+        if (StringUtil.getFormField(form, 'id') == 0)
+            url += '/rest/param/add';
+        else
+            url += '/rest/param/update';
+        if (!form.isValid())return;
+        AjaxUtil.doPost({
+            url: url,
+            jsonData: form.getValues(),
+            success: function (response) {
+                restInterface.getViewModel().getStore("rest_param_store").reload();
+                win.close();
+            }
+        });
     },
 });
