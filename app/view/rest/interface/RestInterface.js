@@ -58,6 +58,8 @@ Ext.define('hygl.view.rest.interface.RestInterface', {
                 xtype: 'button', glyph: IconUtil.glyphClear, text: '清空', handler: 'clear'
             }, '-', {
                 xtype: 'button', text: '新增', glyph: IconUtil.glyphAdd, handler: 'add'
+            }, {
+                xtype: 'button', text: '测试', glyph: IconUtil.glyphOK, handler: 'test'
             }],
             bbar: {
                 xtype: 'pagingtoolbar', displayInfo: true

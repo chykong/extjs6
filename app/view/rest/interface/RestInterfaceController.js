@@ -111,6 +111,35 @@ Ext.define('hygl.view.rest.interface.RestInterfaceController', {
         var store = this.getViewModel().getStore("rest_interface_store")
         store.load();
     },
+
+    /**
+     * 测试接口
+     */
+    test: function () {
+        var grid = ExtUtil.getComponent('restInterface').getComponent('restInterface');
+        var record = grid.getSelectionModel().getLastSelected();
+        if (!record)return;
+        var win = Ext.create('hygl.view.rest.interface.RestTestWindow');
+        var form = win.down('form');
+        StringUtil.setFormField(form, 'requestBody', record.data.requestExample);
+        StringUtil.setFormField(form, 'url', record.data.url);
+    },
+
+    /**
+     * 执行测试
+     */
+    testRest: function (btn) {
+        var win = btn.up('window'),
+            form = win.down('form'),
+            restInterface = ExtUtil.getComponent('restInterface');
+        AjaxUtil.doPost({
+            url: GlobalConst.appDoamin + '/rest/interface/test',
+            jsonData: form.getValues(),
+            success: function (response) {
+                StringUtil.setFormField(form, 'response', response.data);
+            }
+        })
+    },
     /**************************************************/
     /**
      * 新增参数
@@ -121,12 +150,11 @@ Ext.define('hygl.view.rest.interface.RestInterfaceController', {
         var record = grid.getSelectionModel().getLastSelected();
         if (!record)return;
 
-        var win = Ext.create('hygl.view.rest.param.RestParamWindow', {
+        var win = Ext.create('hygl.view.rest.interface.RestParamWindow', {
             title: '新增参数'
         });
         var form = win.down('form');
         StringUtil.setFormField(form, 'id', '0');
-        // StringUtil.setFormField(form, 'type', '1');
         StringUtil.setFormField(form, 'interfaceId', record.data.id);
     },
     /**
@@ -137,7 +165,7 @@ Ext.define('hygl.view.rest.interface.RestInterfaceController', {
      */
     editParam: function (grid, rowIndex, colIndex) {
         var record = grid.getStore().getAt(rowIndex);
-        var win = Ext.create('hygl.view.rest.param.RestParamWindow', {title: '修改参数'});
+        var win = Ext.create('hygl.view.rest.interface.RestParamWindow', {title: '修改参数'});
         win.down('form').loadRecord(record);
     },
     /**
