@@ -74,9 +74,15 @@ Ext.define('hygl.view.rest.interface.RestInterfaceWindow', {
             maxLength: 500
         }, {
             name: 'requestExample',
-            fieldLabel: '模拟数据',
+            fieldLabel: '接口请求例子',
             xtype: 'textarea',
-            height: 200,
+            height: 100,
+            maxLength: 2000
+        }, {
+            name: 'responseExample',
+            fieldLabel: '接口响应例子',
+            xtype: 'textarea',
+            height: 100,
             maxLength: 2000
         }, {
             name: 'parentId',

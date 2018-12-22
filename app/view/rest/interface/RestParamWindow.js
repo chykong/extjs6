@@ -84,7 +84,7 @@ Ext.define('hygl.view.rest.interface.RestParamWindow', {
                 xtype: 'button',
                 text: '保存',
                 glyph: IconUtil.glyphSave,
-                handler: 'testRest'
+                handler: 'saveParam'
             }, {
                 xtype: 'button',
                 text: '取消',

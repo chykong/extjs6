@@ -30,6 +30,9 @@ Ext.define('hygl.view.rest.interface.RestTestWindow', {
         defaultType: 'textfield',
         buttonAlign: 'center',
         items: [{
+            name: 'domain',
+            fieldLabel: '请求domain',
+        }, {
             name: 'url',
             fieldLabel: '请求Url',
         }, {
@@ -39,7 +42,7 @@ Ext.define('hygl.view.rest.interface.RestTestWindow', {
         }, {
             name: 'value',
             fieldLabel: '请求header value',
-            value:'zgs17j07m34ayc5'
+            value: 'zgs17j07m34ayc5'
         }, {
             name: 'requestBody',
             fieldLabel: '请求body',

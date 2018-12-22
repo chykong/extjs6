@@ -23,6 +23,9 @@ Ext.define("hygl.model.rest.RestInterface", {
         name: 'requestExample',
         type: 'string'
     }, {
+        name: 'responseExample',
+        type: 'string'
+    }, {
         name: 'parentId',
         type: 'int'
     }, {

@@ -123,6 +123,9 @@ Ext.define('hygl.view.rest.interface.RestInterfaceController', {
         var form = win.down('form');
         StringUtil.setFormField(form, 'requestBody', record.data.requestExample);
         StringUtil.setFormField(form, 'url', record.data.url);
+        StringUtil.setFormField(form, 'domain', Ext.util.Cookies.get('rest_domain'));
+        StringUtil.setFormField(form, 'key', Ext.util.Cookies.get('rest_key'));
+        StringUtil.setFormField(form, 'value', Ext.util.Cookies.get('rest_value'));
     },
 
     /**
@@ -132,6 +135,11 @@ Ext.define('hygl.view.rest.interface.RestInterfaceController', {
         var win = btn.up('window'),
             form = win.down('form'),
             restInterface = ExtUtil.getComponent('restInterface');
+        var now = new Date();
+        var expiry = new Date(now.getTime() + 365 * 24 * 60 * 60 * 1000);//保存一年
+        Ext.util.Cookies.set('rest_domain', StringUtil.getFormField(form, 'domain'), expiry);
+        Ext.util.Cookies.set('rest_key', StringUtil.getFormField(form, 'key'), expiry);
+        Ext.util.Cookies.set('rest_value', StringUtil.getFormField(form, 'value'), expiry);
         AjaxUtil.doPost({
             url: GlobalConst.appDoamin + '/rest/interface/test',
             jsonData: form.getValues(),

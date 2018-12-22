@@ -95,7 +95,7 @@ Ext.define('hygl.view.rest.system.RestSystemController', {
      * 查询
      */
     search: function () {
-        var store = this.getViewModel().getStore("restSystemStore")
+        var store = this.getViewModel().getStore("rest_system_store")
         store.load();
     },
 });
