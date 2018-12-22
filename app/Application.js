@@ -161,7 +161,7 @@ Ext.define('hygl.Application', {
         });
         //设置首页面
         Ext.create({
-            xtype: 'login'
+            xtype: 'mainIndex'
         });
         this.callParent();
     },
