@@ -4,6 +4,7 @@ Ext.define('hygl.view.sys.role.SysRoleAuthority', {
     xtype: 'sysRoleAuthority',
     store: Ext.create('Ext.data.TreeStore', {
         model: 'hygl.view.sys.role.SysRoleAuthorityModel',
+        autoLoad: false,
         proxy: {
             type: 'ajax',
             actionMethods: {
@@ -18,7 +19,6 @@ Ext.define('hygl.view.sys.role.SysRoleAuthority', {
     }),
     margin: '0 0 0 2',
     rootVisible: false,
-    autoLoad: false,
     useArrows: false,
     animate: true,
     frame: true,
