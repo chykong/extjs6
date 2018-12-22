@@ -24,7 +24,8 @@ Ext.define('hygl.Application', {
         'util.ExtUtil',
     ],
     views: [
-        'hygl.view.main.index.MainIndex',
+        'hygl.view.login.Login',
+        // 'hygl.view.main.index.MainIndex',
         // 'sys.log.SysLogController'
         // 'sys.log.SysLog',
         // 'sys.role.SysRole',
@@ -160,7 +161,7 @@ Ext.define('hygl.Application', {
         });
         //设置首页面
         Ext.create({
-            xtype: 'mainIndex'
+            xtype: 'login'
         });
         this.callParent();
     },

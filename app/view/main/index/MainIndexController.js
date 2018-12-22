@@ -6,18 +6,16 @@ Ext.define('hygl.view.main.index.MainIndexController', {
         Ext.Viewport = this.getView();
         Ext.FramePanel = Ext.Viewport.items.items[3];  //主窗口面板
         var me = this;
-
         window.application = hygl.getApplication();
     },
-    onClickButton: function () {
+    logout: function () {
         // Remove the localStorage key/value
         // localStorage.removeItem('TutorialLoggedIn');
         // Remove Main View
         this.getView().destroy();
-
         // Add the Login Window
         Ext.create({
-            xtype: 'sysLogin'
+            xtype: 'login'
         });
     },
     onTreeNavSelectionChange: function (selModel, records) {
