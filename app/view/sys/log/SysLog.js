@@ -86,7 +86,8 @@ Ext.define('hygl.view.sys.log.SysLog', {
         bind: {value: '{searchField.endDate}'},
         width: 120
     }, {
-        xtype: 'button', glyph: IconUtil.glyphSearch, text: '查询', handler: 'search'
+        xtype: 'button', glyph: IconUtil.glyphSearch, text: '查询', handler: 'search',
+        // hidden: StringUtil.setHidden('sysLogSearch')
     }, {
         xtype: 'button', glyph: IconUtil.glyphClear, text: '清空', handler: 'clear'
     }],

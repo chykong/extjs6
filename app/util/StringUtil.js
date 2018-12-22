@@ -171,5 +171,12 @@ Ext.define('util.StringUtil', {
         var form = win.down('form');
         if (form) form.getForm().reset();
         win.close();
+    },
+    /**
+     * 设置按钮是否显示，根据权限来控制
+     * @param btn
+     */
+    setHidden: function (btn) {
+        return !Ext.buttonAutho.contains(btn);
     }
 });

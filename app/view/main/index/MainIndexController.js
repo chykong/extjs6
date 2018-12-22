@@ -7,21 +7,35 @@ Ext.define('hygl.view.main.index.MainIndexController', {
         Ext.FramePanel = Ext.Viewport.items.items[3];  //主窗口面板
         var me = this;
         window.application = hygl.getApplication();
-        this.createMenu();
+        this.createButton();
     },
     /**
-     * 创建菜单
+     * 初始化按钮权限
      */
-    createMenu: function () {
-        /*Ext.Ajax.request({
-            url: GlobalConst.appDoamin + '/getRoleAutho',
+    createButton: function () {
+        //加载按钮权限
+        Ext.Ajax.request({
+            url: GlobalConst.appDoamin + '/getRoleButton',
             method: 'POST',
             success: function (response) {
-                var menus = Ext.decode(response.responseText);
-                var left = ExtUtil.getComponent('mainIndexLeft').getComponent('tree1');
-                left.getStore().setData(menus.data);
+                var buttons = Ext.decode(response.responseText).data;
+                var map = new Ext.util.HashMap();
+                for (var item in buttons) {
+                    map.add(buttons[item].resourceCode, buttons[item].resourceCode);
+                }
+                Ext.buttonAutho = map;
             }
-        });*/
+        });
+
+        /*Ext.Ajax.request({
+         url: GlobalConst.appDoamin + '/getRoleAutho',
+         method: 'POST',
+         success: function (response) {
+         var menus = Ext.decode(response.responseText);
+         var left = ExtUtil.getComponent('mainIndexLeft').getComponent('tree1');
+         left.getStore().setData(menus.data);
+         }
+         });*/
     },
     logout: function () {
         // Remove the localStorage key/value
