@@ -47,7 +47,7 @@ Ext.define('hygl.view.sys.resource.SysMenuWindow', {
                     useArrows: true,
                     displayField: 'text',
                     emptyText: '请选择...',
-                    allowBlank: false,
+                    allowBlank: true,
                     forceSelection: true,
                     store: Ext.create('Ext.data.TreeStore', {
                         id: 'parentIdStore',
@@ -93,7 +93,7 @@ Ext.define('hygl.view.sys.resource.SysMenuWindow', {
                         name: 'iconImg',
                         fieldLabel: '图标',
                         id: 'iconImg',
-                        allowBlank: false
+                        allowBlank: true
                     }, {
                         xtype: 'button',
                         text: '选择',

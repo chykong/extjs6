@@ -7,6 +7,21 @@ Ext.define('hygl.view.main.index.MainIndexController', {
         Ext.FramePanel = Ext.Viewport.items.items[3];  //主窗口面板
         var me = this;
         window.application = hygl.getApplication();
+        this.createMenu();
+    },
+    /**
+     * 创建菜单
+     */
+    createMenu: function () {
+        /*Ext.Ajax.request({
+            url: GlobalConst.appDoamin + '/getRoleAutho',
+            method: 'POST',
+            success: function (response) {
+                var menus = Ext.decode(response.responseText);
+                var left = ExtUtil.getComponent('mainIndexLeft').getComponent('tree1');
+                left.getStore().setData(menus.data);
+            }
+        });*/
     },
     logout: function () {
         // Remove the localStorage key/value

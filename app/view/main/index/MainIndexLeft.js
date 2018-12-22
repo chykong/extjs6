@@ -8,11 +8,13 @@ Ext.define('hygl.view.main.index.MainIndexLeft', {
     items: [
         {
             xtype: 'treepanel',
+            itemId: 'tree1',
             title: '测试',
             width: 200,
             height: 200,
             lines: true,
             rootVisible: false,
+            useArrows: true,
             store: Ext.create('hygl.view.main.index.MainIndexLeftStore', {
                 storeId: "leftStoreId"
             }),

@@ -3,10 +3,15 @@ Ext.define('hygl.view.main.index.MainIndexLeftStore', {
     alias: 'store.mainIndexLeftStore',
     proxy: {
         type: 'ajax',
-        url: 'app/data/menu.json'
+        actionMethods: {
+            read: 'POST'
+        },
+        url: GlobalConst.appDoamin + '/getRoleAutho',
+        reader: {
+            type: 'json',
+            // rootProperty: 'data'
+        }
     },
-    root: {
-        expanded: true
-    },
-    autoLoad: true
+
+    // autoLoad: true
 });
